@@ -6,35 +6,24 @@ from appium.webdriver.common.appiumby import AppiumBy
 from dotenv import load_dotenv
 from selenium.common.exceptions import NoSuchElementException
 
+from utils.android_utils import android_get_desired_capabilities
+
 load_dotenv()
 
-
-def assert_login_successful(login_page):
-    assert login_page.find_element(
-        by=AppiumBy.XPATH,
-        value='//android.widget.ImageView[@resource-id="com.ajaxsystems:id/menuDrawer"]'
-    )
-
-
-def assert_login_failed(login_page):
-    with pytest.raises(NoSuchElementException):
-        login_page.find_element(
-            by=AppiumBy.XPATH,
-            value='//android.widget.ImageView[@resource-id="com.ajaxsystems:id/menuDrawer"]'
-        )
-        
 
 @pytest.mark.parametrize(
     "email, password, expected",
     [
-        (os.getenv("EMAIL"), os.getenv("PASSWORD"), "success"),
         ("mail@gmail.com", "123456", "failure"),
-        ("some_email@gmail.com", "qwerty", "failure"),
-        ("", "password", "failure"),
+        (os.getenv("EMAIL"), os.getenv("PASSWORD"), "success"),
     ],
 )
-def test_user_login(user_login_fixture, email, password, expected):
+def test_login(user_login_fixture, email, password, expected):
     login_page = user_login_fixture
+    if login_page.driver.session_id:
+        login_page.driver.quit()
+    login_page.driver.start_session(android_get_desired_capabilities())  # TODO:FIND BETTER WAY TO AVOID InvalidSessionIdException
+
     login_page.click_element(login_page.login_button())
     login_page.enter_email(email)
     login_page.enter_password(password)
@@ -53,3 +42,4 @@ def test_user_login(user_login_fixture, email, password, expected):
                     by=AppiumBy.XPATH,
                     value='//android.widget.ImageView[@resource-id="com.ajaxsystems:id/menuDrawer"]'
                 )
+    

@@ -3,6 +3,8 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver import ActionChains
 
 from utils import components
+from utils.android_utils import android_get_desired_capabilities
+
 from .page import Page
 
 

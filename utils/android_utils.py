@@ -15,8 +15,8 @@ def android_get_desired_capabilities() -> dict:
         'resetKeyboard': True,
         'systemPort': 8301,
         'takesScreenshot': True,
-        'udid': "emulator-5554",  # test
-        # 'udid': udid,  # prod
+        # 'udid': "emulator-5554",  # test
+        'udid': udid,
         'appPackage': 'com.ajaxsystems',
         'appActivity': 'com.ajaxsystems.ui.activity.LauncherActivity'
     }
