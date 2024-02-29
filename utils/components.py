@@ -2,3 +2,5 @@ login_button = '(//androidx.compose.ui.platform.ComposeView[@resource-id="com.aj
 email_field = '//android.widget.EditText[@resource-id="com.ajaxsystems:id/authLoginEmail"]'
 password_field = '//android.widget.EditText[@resource-id="com.ajaxsystems:id/authLoginPassword"]'
 submit_button = '(//androidx.compose.ui.platform.ComposeView[@resource-id="com.ajaxsystems:id/compose_view"])[4]/android.view.View/android.view.View/android.widget.Button'
+add_hub_button = '//android.view.ViewGroup[@resource-id="com.ajaxsystems:id/hubAdd"]'
+wrong_creds_message = '//android.widget.TextView[@resource-id="com.ajaxsystems:id/text" and @text="Forgot password?"]'
